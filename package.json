@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "prebidjs-install": "npm run task-prebidjs-setup && npm run task-prebidjs-build",
+        "task-prebidjs-setup": "git clone https://github.com/prebid/Prebid.js.git library && npm --prefix ./library install ./library",
+        "task-prebidjs-build": "library/node_modules/.bin/gulp --gulpfile library/gulpfile.js && cp library/build/dist/prebid.js dist/prebid.js"
+    }
+}
