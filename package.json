@@ -2,6 +2,16 @@
     "scripts": {
         "prebidjs-install": "npm run task-prebidjs-setup && npm run task-prebidjs-build",
         "task-prebidjs-setup": "git clone https://github.com/prebid/Prebid.js.git library && npm --prefix ./library install ./library",
-        "task-prebidjs-build": "library/node_modules/.bin/gulp --gulpfile library/gulpfile.js && cp library/build/dist/prebid.js dist/prebid.js"
+        "task-prebidjs-build": "library/node_modules/.bin/gulp --gulpfile library/gulpfile.js && cp library/build/dist/prebid.js dist/prebid.js",
+        "rollup": "./node_modules/.bin/rollup -c --input src/main.js --output dist/main.js",
+        "rollup-dev": "npm run rollup -- --environment build:dev -w"
+    },
+    "devDependencies": {
+        "babel-preset-es2015-rollup": "^3.0.0",
+        "rollup": "^0.41.6",
+        "rollup-plugin-babel": "^2.7.1",
+        "rollup-plugin-replace": "^1.1.1",
+        "rollup-plugin-uglify": "^1.0.2",
+        "rollup-watch": "^3.2.2"
     }
 }
