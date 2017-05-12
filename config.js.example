@@ -4,5 +4,7 @@ export const assets = [{
     attributes: {
         src: `http://prebidjs.dev`,
         async: 'true'
-    }
+    },
+
+    app_path: 'http://prebidjs.dev'
 }];
