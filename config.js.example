@@ -1,0 +1,8 @@
+export const assets = [{
+    name: 'pbjs',
+    tag: 'script',
+    attributes: {
+        src: `http://prebidjs.dev`,
+        async: 'true'
+    }
+}];
