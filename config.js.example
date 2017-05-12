@@ -6,5 +6,11 @@ export const assets = [{
         async: 'true'
     },
 
-    app_path: 'http://prebidjs.dev'
+    app_path: 'http://prebidjs.dev',
+
+    // timeouts in seconds
+    timeout: {
+        desktop: 1,
+        mobile: 2
+    }
 }];
