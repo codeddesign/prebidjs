@@ -14,6 +14,9 @@ class Allocator {
         this.$auction = new Auction(this);
 
         this.$offers = [];
+        for (const target_id in this.$campaign.targets) {
+            this.$offers[target_id] = [];
+        }
     }
 
     /**
@@ -29,16 +32,28 @@ class Allocator {
             for (const target_id in offers) {
                 const targetOffers = offers[target_id];
 
-                if (!this.$offers[target_id]) {
-                    this.$offers[target_id] = [];
-                }
-
                 targetOffers.bids.forEach((bid) => {
                     if (bid.getStatusCode() !== 1) {
                         return false;
                     }
 
                     this.$offers[target_id].push(bid);
+                });
+            }
+
+            // add backup bids
+            for (const target_id in this.$campaign.targets) {
+                this.$campaign.backups.forEach((backup) => {
+                    if (this.$campaign.targets[target_id].indexOf(backup.size) !== -1) {
+                        const bid = Object.assign({}, backup);
+                        bid.is_backup = true;
+
+                        const [width, height] = bid.size.split('x');
+                        bid.width = parseInt(width);
+                        bid.height = parseInt(height);
+
+                        this.$offers[target_id].push(bid);
+                    }
                 });
             }
 
@@ -55,8 +70,10 @@ class Allocator {
                     continue;
                 }
 
-                // add backup
-                console.warn(target_id, 'requires a backup');
+                // Debugging: only if element exists in view
+                if (this.$view.$slots[target_id]) {
+                    console.warn(target_id, 'has no backup');
+                }
             }
         } catch (e) {
             console.error(e);
