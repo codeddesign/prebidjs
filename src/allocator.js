@@ -1,4 +1,5 @@
 import Auction from './auction';
+import View from './view/view';
 
 class Allocator {
     /**
@@ -9,6 +10,7 @@ class Allocator {
     constructor(campaign) {
         this.$campaign = campaign;
 
+        this.$view = new View(this);
         this.$auction = new Auction(this);
 
         this.$offers = [];
@@ -47,12 +49,14 @@ class Allocator {
                 });
 
                 const ad = this.$offers[target_id].shift();
-                if (!ad) {
-                    // add backup
-                    console.warn(target_id, 'requires a backup');
+                if (ad) {
+                    this.$view.fill(target_id, ad);
+
+                    continue;
                 }
 
-                console.log(target_id, ad);
+                // add backup
+                console.warn(target_id, 'requires a backup');
             }
         } catch (e) {
             console.error(e);
