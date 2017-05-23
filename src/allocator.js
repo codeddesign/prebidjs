@@ -1,5 +1,6 @@
 import Auction from './auction';
 import View from './view/view';
+import bidCache from './cache/bidcache';
 
 class Allocator {
     /**
@@ -27,6 +28,8 @@ class Allocator {
      * @return {Allocator}
      */
     offersListener(offers) {
+        // console.info('received', offers);
+
         try {
             // add main bids
             for (const target_id in offers) {
@@ -41,8 +44,17 @@ class Allocator {
                 });
             }
 
-            // add backup bids
+            // add extra bids
             for (const target_id in this.$campaign.targets) {
+                // add cached bids
+                this.$campaign.targets[target_id].forEach((size) => {
+                    const bid = bidCache.allocate(size);
+                    if (bid) {
+                        this.$offers[target_id].push(bid);
+                    }
+                });
+
+                // add backup bids
                 this.$campaign.backups.forEach((backup) => {
                     if (this.$campaign.targets[target_id].indexOf(backup.size) !== -1) {
                         const bid = Object.assign({}, backup);
@@ -66,6 +78,17 @@ class Allocator {
                 const ad = this.$offers[target_id].shift();
                 if (ad) {
                     this.$view.fill(target_id, ad);
+
+                    if (ad.cached_key) {
+                        bidCache.delete(ad.cached_key);
+                    }
+
+                    // cache unused
+                    this.$offers[target_id].forEach((offer) => {
+                        if (!offer.is_backup && !offer.cached_key) {
+                            bidCache.save(offer);
+                        }
+                    });
 
                     continue;
                 }

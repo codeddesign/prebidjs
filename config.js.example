@@ -12,5 +12,9 @@ export const assets = [{
     timeout: {
         desktop: 1,
         mobile: 2
+    },
+
+    expiration: {
+        cache: 12, // number of hours
     }
 }];
