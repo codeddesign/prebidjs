@@ -2,7 +2,7 @@
     "scripts": {
         "prebidjs-install": "npm run task-prebidjs-setup && npm run task-prebidjs-build",
         "task-prebidjs-setup": "git clone https://github.com/prebid/Prebid.js.git library && npm --prefix ./library install ./library",
-        "task-prebidjs-build": "library/node_modules/.bin/gulp --gulpfile library/gulpfile.js && cp library/build/dist/prebid.js dist/prebid.js",
+        "task-prebidjs-build": "mv library/adapters.json library/adapters.json.backup && cp adapters.json library/ && library/node_modules/.bin/gulp --gulpfile library/gulpfile.js && cp library/build/dist/prebid.js dist/prebid.js",
         "rollup": "./node_modules/.bin/rollup -c --input src/main.js --output dist/main.js",
         "rollup-dev": "npm run rollup -- --environment build:dev -w"
     },

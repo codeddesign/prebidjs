@@ -1,0 +1,14 @@
+[
+  "criteo",
+  "pulsepoint",
+  "pulsepointLite",
+  "rubicon",
+  {
+    "rubicon": {
+      "alias": "rubiconLite",
+      "supportedMediaTypes": [
+        "video"
+      ]
+    }
+  }
+]
