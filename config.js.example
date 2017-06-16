@@ -1,10 +1,12 @@
-export const assets = [{
-    name: 'pbjs',
-    tag: 'script',
-    attributes: {
-        src: `http://prebidjs.dev`,
-        async: 'true'
-    },
+export default {
+    assets: [{
+        name: 'pbjs',
+        tag: 'script',
+        attributes: {
+            src: `http://prebidjs.dev/prebid.js`,
+            async: 'true'
+        }
+    }],
 
     app_path: 'http://prebidjs.dev',
 
@@ -17,4 +19,4 @@ export const assets = [{
     expiration: {
         cache: 12, // number of hours
     }
-}];
+};
