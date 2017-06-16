@@ -55,11 +55,17 @@ class Auction {
 
         // units: create as object for uniqueness
         this.__allocator.$campaign.providers.forEach((provider) => {
+            if (!device.mobile() && provider.device == 'mobile') {
+                return false;
+            }
+
             for (const target_id in this.__allocator.$campaign.targets) {
                 this.__allocator.$campaign.targets[target_id].forEach((size) => {
-                    if (provider.available_sizes.indexOf(size) === -1) {
+                    if (provider.available_sizes !== true && provider.available_sizes.indexOf(size) === -1) {
                         return false;
                     }
+
+                    // console.info('option', provider, size);
 
                     if (!units[target_id]) {
                         units[target_id] = {
