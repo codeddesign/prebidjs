@@ -1,14 +1,6 @@
 [
-  "criteo",
-  "pulsepoint",
-  "pulsepointLite",
-  "rubicon",
-  {
-    "rubicon": {
-      "alias": "rubiconLite",
-      "supportedMediaTypes": [
-        "video"
-      ]
-    }
-  }
+  "criteoBidAdapter",
+  "pulsepointBidAdapter",
+  "pulsepointLiteBidAdapter",
+  "rubiconBidAdapter"
 ]
