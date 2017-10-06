@@ -5,7 +5,8 @@ import Allocator from './allocator';
 
 add_assets()
     .then(() => {
-        let uri = config.app_path + '/pbjs/campaign/';
+        // @todo: dynamic campaign id
+        let uri = config.app_path + '/campaign/1/?referrer=' + document.referrer;
 
         ajax().json(uri)
             .then((response) => {

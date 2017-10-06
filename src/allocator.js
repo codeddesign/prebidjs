@@ -11,13 +11,13 @@ class Allocator {
     constructor(campaign) {
         this.$campaign = campaign;
 
-        this.$view = new View(this);
-        this.$auction = new Auction(this);
-
         this.$offers = [];
         for (const target_id in this.$campaign.targets) {
             this.$offers[target_id] = [];
         }
+
+        this.$view = new View(this);
+        this.$auction = new Auction(this);
     }
 
     /**
